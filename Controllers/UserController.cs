@@ -7,7 +7,7 @@ namespace MyMvcApp.Controllers;
 public class UserController : Controller
 {
     public static System.Collections.Generic.List<User> userlist = new System.Collections.Generic.List<User>();
-
+    // Why hello there
     // GET: User
     public ActionResult Index(string searchString, string searchBy)
     {
