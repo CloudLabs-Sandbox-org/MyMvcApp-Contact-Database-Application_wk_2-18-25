@@ -9,9 +9,32 @@ public class UserController : Controller
     public static System.Collections.Generic.List<User> userlist = new System.Collections.Generic.List<User>();
 
     // GET: User
-    public ActionResult Index()
+    public ActionResult Index(string searchString, string searchBy)
     {
-        return View(userlist);
+        var users = userlist;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            switch (searchBy)
+            {
+                case "Name":
+                    users = userlist.Where(u => u.Name.Contains(searchString, 
+                        StringComparison.OrdinalIgnoreCase)).ToList();
+                    break;
+                case "Email":
+                    users = userlist.Where(u => u.Email.Contains(searchString, 
+                        StringComparison.OrdinalIgnoreCase)).ToList();
+                    break;
+                default:
+                    users = userlist.Where(u => 
+                        u.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) || 
+                        u.Email.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+                    break;
+            }
+        }
+
+        return View(users);
     }
 
     // GET: User/Details/5

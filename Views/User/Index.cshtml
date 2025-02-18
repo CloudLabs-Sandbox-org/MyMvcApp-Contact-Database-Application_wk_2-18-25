@@ -9,6 +9,24 @@
 <p>
     @Html.ActionLink("Create New", "Create", "User")
 </p>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "User", FormMethod.Get))
+        {
+            <div class="input-group">
+                <select name="searchBy" class="form-select" style="max-width: 120px;">
+                    <option value="">All Fields</option>
+                    <option value="Name">Name</option>
+                    <option value="Email">Email</option>
+                </select>
+                @Html.TextBox("searchString", null, new { @class = "form-control" })
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        }
+    </div>
+</div>
+
 <table class="table">
     <tr>
         <th>
